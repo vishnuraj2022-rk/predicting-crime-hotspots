@@ -51,4 +51,4 @@ ggsave("output/crimes_by_month.png", plot = p3, width = 8, height = 5)
 ggsave("output/arrest_vs_nonarrest.png", plot = p4, width = 8, height = 5)
 ggsave("output/top_10_districts.png", plot = p5, width = 8, height = 5)
 
-summary(crime_clean)
+summary(crime_clean)  
