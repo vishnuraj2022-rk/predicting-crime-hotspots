@@ -43,4 +43,4 @@ print(conf_matrix_log)
 print(conf_matrix_rf)
 
 capture.output(conf_matrix_log, file = "output/logistic_regression_results.txt")
-capture.output(conf_matrix_rf, file = "output/random_forest_results.txt")
+capture.output(conf_matrix_rf, file = "output/random_forest_results.txt")   
