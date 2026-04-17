@@ -1,143 +1,13 @@
-# Predicting Crime Hotspots for Patrol Planning Using Chicago Crime Data
+# Crime Hotspot Prediction for Patrol Planning
 
-## Project Overview
-This project focuses on predicting crime hotspot-prone district-hour combinations using historical Chicago crime data. The objective is to support patrol planning by identifying areas and time periods with a higher likelihood of crime occurrence. The project follows an end-to-end data science workflow using R for data collection, preprocessing, exploratory analysis, and modeling, and Power BI Desktop for interactive dashboard creation.
+This project aims to predict crime hotspot-prone areas and times in Chicago using historical crime data. By analyzing crime patterns, the project helps optimize police patrol planning by identifying locations and hours with a higher likelihood of crime. The project uses R for data collection, preprocessing, modeling, and Power BI Desktop for visualizations.
 
-## Problem Statement
-Police patrol resources are limited, while crime patterns vary across districts, time periods, and offense categories. This project analyzes open Chicago crime records to identify hotspot patterns and classify district-hour combinations as hotspot or non-hotspot. The results can support better patrol allocation and data-driven urban safety planning.
+## Requirements
 
-## Objectives
-- Collect crime records from a public open-data API
-- Preprocess and clean the dataset in R
-- Perform exploratory data analysis using multiple visualizations
-- Engineer time-based features from the crime timestamp
-- Build hotspot classification models
-- Compare Logistic Regression and Random Forest performance
-- Create an interactive Power BI dashboard with R visuals
-- Maintain a version-controlled workflow using GitHub
-- Demonstrate reproducibility using Docker
+### R & R Packages
 
-## Domain
-Smart Cities / Public Safety / Urban Analytics
+To run this project, you’ll need to have **R** installed on your system. This project uses the following R packages:
 
-## Dataset Information
-- **Dataset Source:** City of Chicago Data Portal – Crimes: 2001 to Present
-- **Dataset Type:** Public open government dataset
-- **Access Method:** Socrata Open Data API
-- **Raw Dataset Size Used in Project:** 100,000 API-fetched records
-- **Cleaned Dataset Size:** 85,281 rows
-- **Number of attributes after preprocessing:** 17
-- **Data types present:** character, integer, numeric, logical, datetime
-
-## Attributes Used
-- `id`
-- `date`
-- `primary_type`
-- `description`
-- `arrest`
-- `domestic`
-- `district`
-- `beat`
-- `community_area`
-- `latitude`
-- `longitude`
-- `hour`
-- `day`
-- `month`
-- `year`
-- `weekday`
-- `weekend`
-
-## API Integration
-The project uses the Socrata Open Data API to collect Chicago crime records directly from the public data portal.
-
-- **API Endpoint:** `https://data.cityofchicago.org/resource/ijzp-q8t2.json`
-- **HTTP Method:** `GET`
-- **Pagination Used:** `$limit` and `$offset`
-- **Response Format:** JSON
-- **Conversion:** JSON to R data frame using `jsonlite`
-
-API-based ingestion was used to satisfy the project requirement for:
-- open/public data usage
-- pagination handling
-- JSON-to-data-frame conversion
-- automated data collection workflow
-
-## Data Preprocessing
-The raw dataset was cleaned and transformed in R using the preprocessing script. The main preprocessing steps include:
-- conversion of `date` into datetime format
-- extraction of `hour`, `day`, `month`, `year`, and `weekday`
-- creation of a `weekend` flag
-- removal of rows with missing values in important time fields
-- export of the cleaned dataset to CSV for further analysis and dashboarding
-
-## Exploratory Data Analysis
-EDA was performed in R and the following outputs were generated:
-- crime count by hour
-- crime count by month
-- top 10 crime types
-- top 10 districts
-- arrest vs non-arrest comparison
-- correlation heatmap
-- latitude boxplot
-- hour distribution histogram
-
-These visualizations helped identify crime trends, seasonal patterns, and important hotspot-related characteristics.
-
-## Modeling
-The project uses supervised learning to classify district-hour combinations as hotspot or non-hotspot.
-
-### Models Used
-- Logistic Regression
-- Random Forest
-
-### Final Results
-#### Logistic Regression
-- **Accuracy:** 85.98%
-- **Balanced Accuracy:** 78.99%
-- **Sensitivity:** 65.38%
-- **Specificity:** 92.59%
-
-#### Random Forest
-- **Accuracy:** 94.39%
-- **Balanced Accuracy:** 92.38%
-- **Sensitivity:** 88.46%
-- **Specificity:** 96.30%
-
-### Conclusion
-Random Forest outperformed Logistic Regression in overall accuracy, balanced accuracy, and hotspot detection performance. Therefore, Random Forest was selected as the better final classifier for this project.
-
-## Power BI Dashboard
-An interactive dashboard was created in Power BI Desktop using the cleaned crime dataset.
-
-### Dashboard Features
-- Total Crimes KPI
-- Total Districts KPI
-- Hot Hours Covered KPI
-- Crimes by Hour chart
-- Crimes by Month chart
-- Arrest vs Non-Arrest chart
-- Top 10 Crime Types chart
-- Filters for district, crime type, weekend, and year
-- R visuals for:
-  - crime distribution by hour
-  - latitude outlier analysis
-
-### Code-backed Power BI Components
-The Power BI report is not only drag-and-drop based. It also uses:
-- **Power Query M** for data loading and transformation
-- **DAX measures** for KPI calculations
-- **R visuals** for custom analytical charts
-
-## Tools and Technologies
-- **R**
-- **RStudio**
-- **Power BI Desktop**
-- **VS Code**
-- **GitHub**
-- **Docker**
-
-## R Packages Used
 - `httr`
 - `jsonlite`
 - `dplyr`
@@ -147,8 +17,53 @@ The Power BI report is not only drag-and-drop based. It also uses:
 - `randomForest`
 - `caret`
 
-## Project Structure
-```text
+You can install these packages using the following commands in R:
+
+```R
+install.packages("httr")
+install.packages("jsonlite")
+install.packages("dplyr")
+install.packages("readr")
+install.packages("lubridate")
+install.packages("ggplot2")
+install.packages("randomForest")
+install.packages("caret")
+
+Power BI Desktop:
+For dashboard visualization and interactive exploration, Power BI Desktop is used.
+
+Docker (Optional):
+Docker is used to containerize the project environment for easy deployment. This is optional but highly recommended for consistency across different systems.
+
+GitHub (Optional)
+
+For version control, the project is maintained on GitHub. Clone the repository using the following command:
+git clone https://github.com/vishnuraj2022-rk/predicting-crime-hotspots.git
+
+Installation Instructions
+1.Clone the Repository (if you are working with GitHub):
+git clone https://github.com/vishnuraj2022-rk/predicting-crime-hotspots.git
+
+2.Install Dependencies:
+Install the necessary R packages by running the commands mentioned in the Requirements section above.
+
+3.Run R Scripts:
+
+Open R or RStudio.
+Run the 01_data_collection.R script to fetch the latest crime data from the API.
+Execute 02_preprocessing.R to clean and preprocess the dataset.
+Run 03_eda.R for exploratory data analysis (EDA) and visualization.
+Run 04_modeling.R for training and evaluating the models (Logistic Regression and Random Forest).
+
+Alternatively, you can run all scripts in sequence by executing: .\run_all.ps1
+
+4.Power BI Dashboard:
+
+Open the crime_dashboard.pbix file in Power BI Desktop.
+The dashboard will show crime patterns, including visualizations for total crimes, arrests vs. non-arrests, crimes by hour, and more.
+Customize filters (e.g., year, district, weekend) to explore the data interactively.
+
+Project Structure:
 predicting-crime-hotspots/
 ├── data/
 │   ├── chicago_crime_raw.csv
@@ -172,8 +87,46 @@ predicting-crime-hotspots/
 ├── dashboard/
 │   └── crime_dashboard.pbix
 ├── screenshots/
-├── Dockerfile
-├── .dockerignore
 ├── README.md
 └── .gitignore
-...
+
+Running in Docker (Optional)
+
+1.Build Docker Image:
+If you're using Docker, the Dockerfile is already configured to create the environment. Build the Docker image with:
+docker build -t crime-hotspot-project .
+
+2.Run Docker Container:
+Run the container to execute the project environment and scripts:
+docker run --rm crime-hotspot-project
+
+3.Access Data:
+You can access and analyze the crime data and results within the Docker container or copy the results to your local machine.
+
+Output Explanation
+Model Results
+Logistic Regression: Evaluates the probability of a crime being a hotspot based on historical data. Performance metrics include accuracy, sensitivity, specificity, and balanced accuracy.
+Random Forest: A tree-based model that classifies crime instances into hotspots or non-hotspots. Random Forest generally provides better performance in handling non-linear relationships and higher accuracy.
+
+Both models provide statistics such as accuracy, specificity, sensitivity, and other metrics to compare model performance.
+
+Power BI Dashboard:
+Total Crimes: Displays the total number of crimes recorded.
+Hot Hours Covered: Number of unique hours in which crimes occurred.
+Crimes by Hour: Shows the frequency of crimes by hour, helping to identify peak crime hours.
+Arrest vs Non-Arrest: A pie chart representing the percentage of crimes resulting in arrest vs those that did not.
+Top 10 Crime Types: A bar chart showing the most frequent crime types.
+Crimes by Month: A chart representing the frequency of crimes by month.
+
+
+Contributing
+
+If you want to contribute to this project:
+1.Fork the repository.
+2.Create a new branch (git checkout -b feature-name).
+3.Make your changes and commit them (git commit -am 'Add new feature').
+4.Push to the branch (git push origin feature-name).
+5.Create a new pull request.
+
+License
+This project is licensed under the MIT License
